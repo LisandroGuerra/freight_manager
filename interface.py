@@ -2,7 +2,8 @@
 #
 
 
-from database import create_database_and_tables, add_box
+from database import create_database_and_tables, add_box, get_all_boxes
+from tabulate import tabulate
 
 
 def retrieve_numeric_input(called):
@@ -31,6 +32,17 @@ def add_box_menu():
     add_box(connection, (box_name, box_height, box_width, box_length))
 
 
+def display_box_types():
+    # call db helper that returns all the box types in the db
+    boxes = get_all_boxes(connection)
+
+    # print(boxes)
+    print("\n" + tabulate(boxes,
+                          headers=["box_id", "box_name", "height", "width", "length"],
+                          tablefmt="psql") + "\n"
+          )
+
+
 def main_menu():
     print("Welcome to Freight Manager!\n")
 
@@ -43,10 +55,9 @@ def main_menu():
         n = input("Your choice: ")
 
         if n == "1":
-            print("\nChoice 1 selected\n")
             add_box_menu()
         elif n == "2":
-            print("\nChoice 2 selected\n")
+            display_box_types()
         elif n == "3":
             print("\nChoice 3 selected\n")
         elif n == "4":
