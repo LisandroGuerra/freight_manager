@@ -1,20 +1,9 @@
 #
 #
-# Scope of work:
-# - create an interface that offers the user a menu of 5 choices:
-# -- 1. Add a box type
-# -- 2. Show box types
-# -- 3. Load box to container
-# -- 4. Show containers
-# -- 5. Summary Report
-# -- X. Close
 
-# - for now, each choice should print a simple statement indicating
-# the choice, eg "Choice 2 selected"
 
-# - the menu should be offered continuously until the user chooses X,
-# in which case, the interface greets the user and the
-# program terminates
+from database import create_database_and_tables
+
 
 def main_menu():
     print("Welcome to Freight Manager!\n")
@@ -42,5 +31,5 @@ def main_menu():
 
 
 if __name__ == "__main__":
+    create_database_and_tables(filename="freight_prod.db")
     main_menu()
-
