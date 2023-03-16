@@ -5,6 +5,7 @@
 database"""
 
 import sqlite3
+from data_types import Box
 
 
 def create_database_and_tables(filename):
@@ -46,3 +47,10 @@ def add_box(connection, box):
         print("\nBox saved successfully!\n")
     except sqlite3.IntegrityError as e:
         print("\nSorry! Could not persist box to database: ", e, "\n")
+
+
+def get_all_boxes(connection):
+    fetched = connection.execute("SELECT * FROM boxes;").fetchall()
+
+    if fetched:
+        return [Box(*b) for b in fetched]
